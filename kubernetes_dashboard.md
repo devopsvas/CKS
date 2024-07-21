@@ -55,6 +55,9 @@ subjects:
   
 ```
 
+
+
+
 ### Apply the configuration 
 
   `$ kubectl create -f k3s-dashboard.yaml`
@@ -65,6 +68,40 @@ subjects:
 `# kubectl -n kube-system  create token admin-user`
 
 
+## Create a read only user 
+
+`# kubectl create sa readonly-user -n kubernetes-dashboard`
 
 
 
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: readonly-user
+  namespace: kubernetes-dashboard
+EOF
+
+cat <<EOF | kubectl apply -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: readonly-user-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+subjects:
+- kind: ServiceAccount
+  name: readonly-user
+  namespace: kubernetes-dashboard
+EOF
+
+# generate a token for read-only user 
+
+`kubectl -n kubernetes-dashboard get secret readonly-user -o go-template="{{.data.token | base64decode}}"`
+
+
+
+
+[[Reference]]https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
