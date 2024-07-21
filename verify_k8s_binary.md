@@ -19,3 +19,10 @@ or
 
 Comparte the sum which is mentioned in the (https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.30.md#v1300)
 I am using 1.30 version hence the above link works othrwise check (https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/)
+
+
+## Reference 
+
+https://kubernetes.io/docs/setup/release/notes
+
+https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG
