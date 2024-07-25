@@ -16,3 +16,5 @@ Upgrade is allowded to do minor version at a time
 v.1.10 >> v.1.111 >> v.1.12 >> v.1.13 
 
 
+use pkgs.k8s.io for downloadingany packages 
+
